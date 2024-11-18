@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "977978511589",
+    "project_id": "fines-app-f2eed",
+    "storage_bucket": "fines-app-f2eed.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:977978511589:android:07b9dbe74332c6a5dfc40c",
+        "android_client_info": {
+          "package_name": "com.example.fitnesapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBE2MV9OS85u4E3Y4YGuprOiHil85zJNCM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

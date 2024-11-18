@@ -1,0 +1,11 @@
+flutter_native_splash:
+  color: "#232323"
+  image: asset\logo\splash logo.png
+  # branding: asset\logo\image-removebg-preview (5).png
+
+  android_12:
+    color: "#232323"
+    image: asset\logo\splash logo.png
+    # branding: asset\logo\image-removebg-preview (5).png
+
+  web: false
