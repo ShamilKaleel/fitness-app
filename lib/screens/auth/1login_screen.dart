@@ -1,7 +1,7 @@
 import 'package:fitnesapp/utils/app_constants.dart';
 import 'package:flutter/material.dart';
-import 'package:fitnesapp/screen/signup_screen.dart';
-import 'package:fitnesapp/screen/home_screen.dart';
+import 'package:fitnesapp/screens/auth/1signup_screen.dart';
+import 'package:fitnesapp/screens/home_screen1.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});

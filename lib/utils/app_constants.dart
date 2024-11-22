@@ -10,6 +10,8 @@ class AppConstants {
   static const Color yellow = Color(0xFFE2F163);
   static const Color purple = Color(0xFFB3A0FF);
   static const Color bgcColor = Color(0xFF232323);
+  static const Color secondaryColor = Color(0xFF896CFE);
+  static const Color primaryColor = Color(0xFF0073FE);
 
   // Spacing and Padding
   static const double defaultPadding = 16.0;
@@ -43,5 +45,19 @@ class AppConstants {
       'image':
           'https://stay-ease-booking-s3-bucket.s3.amazonaws.com/ee4a5c52f6d7a641a414377641cd98133e1a7b6cdc032eef9e3c0f9931ed4348.jpg', // Replace with actual URL
     },
+  ];
+
+  // List of body parts
+  static const List<String> bodyParts = [
+    "back",
+    "cardio",
+    "chest",
+    "lower arms",
+    "lower legs",
+    "neck",
+    "shoulders",
+    "upper arms",
+    "upper legs",
+    "waist",
   ];
 }

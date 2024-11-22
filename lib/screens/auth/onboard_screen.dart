@@ -1,6 +1,6 @@
 import 'package:fitnesapp/utils/app_constants.dart';
 import 'package:flutter/material.dart';
-import 'package:fitnesapp/screen/login_screen.dart'; // Adjust the path as necessary
+import 'package:fitnesapp/screens/auth/login_screen.dart'; // Adjust the path as necessary
 
 class OnboardScreen extends StatefulWidget {
   const OnboardScreen({super.key});
@@ -162,7 +162,7 @@ class _OnboardScreenState extends State<OnboardScreen> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => LoginScreen()),
+                                builder: (context) => const LoginScreen()),
                           );
                         },
                         child: const Text('Get Started'),

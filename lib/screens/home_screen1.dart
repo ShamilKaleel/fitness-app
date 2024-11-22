@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:fitnesapp/screen/profile_screen.dart';
+import 'package:fitnesapp/screens/profile/profile_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});

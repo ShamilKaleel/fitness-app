@@ -14,7 +14,7 @@ class ProfileScreen extends StatelessWidget {
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios, color: Colors.white),
           onPressed: () {
-            Navigator.pop(context); // Go back to previous screen
+            // Go back to previous screen
           },
         ),
         title: const Text(
@@ -26,29 +26,6 @@ class ProfileScreen extends StatelessWidget {
           ),
         ),
         centerTitle: true,
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: const Color(0xFFB3A0FF),
-        selectedItemColor: const Color(0xFFB3A0FF),
-        unselectedItemColor: const Color(0xFFB3A0FF),
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: '',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.file_copy),
-            label: '',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.star),
-            label: '',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.support_agent),
-            label: '',
-          ),
-        ],
       ),
       body: SingleChildScrollView(
         child: Column(
