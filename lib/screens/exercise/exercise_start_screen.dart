@@ -47,7 +47,8 @@ class _ExerciseStartScreenState extends State<ExerciseStartScreen> {
         // End of exercises, navigate to the congratulation screen
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => const CongratulationScreen()),
+          MaterialPageRoute(
+              builder: (context) => const CongratulationsScreen()),
         );
       }
     }
@@ -69,81 +70,83 @@ class _ExerciseStartScreenState extends State<ExerciseStartScreen> {
     // Go back to the ExerciseScreen when the user wants to cancel
     Navigator.pushReplacement(
       context,
-      MaterialPageRoute(builder: (context) => const CongratulationScreen()),
+      MaterialPageRoute(builder: (context) => const CongratulationsScreen()),
     );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Row(
-          children: [
-            Text('Exercise ${currentExerciseIndex + 1}'),
-            const SizedBox(width: 10),
-            Text('of ${widget.exercises.length}'),
-          ],
-        ),
-      ),
       body: Padding(
-        padding: const EdgeInsets.all(0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+        padding: const EdgeInsets.all(16.0),
+        child: Stack(
           children: [
-            if (!isRestPeriod)
-              Column(
-                children: [
-                  Image.network(
-                    currentExercise.gifUrl,
-                    width: double.infinity,
-                    height: 400,
-                    fit: BoxFit.fitWidth,
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                if (!isRestPeriod)
+                  Column(
+                    children: [
+                      Text(
+                          'Exercise ${currentExerciseIndex + 1} of ${widget.exercises.length}'),
+                      const SizedBox(width: 10),
+                      Text('of ${widget.exercises.length}'),
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(16.0),
+                        child: Image.network(
+                          currentExercise.gifUrl,
+                          width: double.infinity,
+                          height: 400,
+                          fit: BoxFit.fitWidth,
+                        ),
+                      ),
+                      const SizedBox(height: 20),
+                      Text(
+                        currentExercise.name.toUpperCase(),
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                        ),
+                      ),
+                      const SizedBox(height: 20),
+                      const Text(
+                        "X10",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontSize: 75,
+                            color: AppConstants.primaryColor,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ],
+                  )
+                else
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Rest Time: $remainingSeconds seconds',
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                            fontSize: 24, fontWeight: FontWeight.bold),
+                      ),
+                    ],
                   ),
-                  const SizedBox(height: 20),
-                  Text(
-                    currentExercise.name.toUpperCase(),
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
-                    ),
-                  ),
-                  const SizedBox(height: 20),
-                  const Text(
-                    "X10",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        fontSize: 75,
-                        color: AppConstants.primaryColor,
-                        fontWeight: FontWeight.bold),
-                  ),
-                ],
-              )
-            else
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'Rest Time: $remainingSeconds seconds',
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(
-                        fontSize: 24, fontWeight: FontWeight.bold),
-                  ),
-                ],
-              ),
-            const SizedBox(
-              height: 20,
-              width: double.infinity,
-            ),
-            ElevatedButton(
-              onPressed: cancelExercise,
-              child: const Text('Cancel and Go Back'),
-            ),
-            const SizedBox(height: 10),
-            ElevatedButton(
-              onPressed: goToNextExercise,
-              child: const Text('Next Exercise'),
+                const SizedBox(
+                  height: 20,
+                  width: double.infinity,
+                ),
+                ElevatedButton(
+                  onPressed: cancelExercise,
+                  child: const Text('Cancel and Go Back'),
+                ),
+                const SizedBox(height: 10),
+                ElevatedButton(
+                  onPressed: goToNextExercise,
+                  child: const Text('Next Exercise'),
+                ),
+              ],
             ),
           ],
         ),

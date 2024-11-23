@@ -1,3 +1,4 @@
+import 'package:fitnesapp/utils/app_constants.dart';
 import 'package:flutter/material.dart';
 
 class GradientButton extends StatelessWidget {
@@ -20,8 +21,8 @@ class GradientButton extends StatelessWidget {
         decoration: BoxDecoration(
           gradient: const LinearGradient(
             colors: [
-              Color(0xFF0073FE), // Left color
-              Color(0xFF0054FF), // Right color
+              AppConstants.purple, // Left color
+              AppConstants.secondaryColor, // Right color
             ],
             begin: Alignment.centerLeft,
             end: Alignment.centerRight,

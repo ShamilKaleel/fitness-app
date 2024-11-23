@@ -4,6 +4,7 @@ import 'package:fitnesapp/screens/home_screen.dart';
 import 'package:fitnesapp/screens/nutrition/nutrition_screen.dart';
 import 'package:fitnesapp/screens/bmi/bmi_screen.dart';
 import 'package:fitnesapp/screens/profile/profile_screen.dart';
+import 'package:fitnesapp/screens/progress/progress_screen.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -19,6 +20,7 @@ class _MainScreenState extends State<MainScreen> {
   final List<Widget> _screens = [
     HomeScreen(), // Just the content for the home tab
     NutritionScreen(),
+    ProgressScreen(),
     BMIScreen(),
     ProfileScreen(),
   ];
@@ -36,8 +38,8 @@ class _MainScreenState extends State<MainScreen> {
         },
         elevation: 0, // Remove the shadow
         // Background color
-        selectedItemColor: Color.fromARGB(
-            255, 255, 255, 255), // Color for the selected label and icon
+        selectedItemColor:
+            AppConstants.purple, // Color for the selected label and icon
         unselectedItemColor:
             Colors.grey, // Color for the unselected labels and icons
         items: const [
@@ -48,6 +50,10 @@ class _MainScreenState extends State<MainScreen> {
           BottomNavigationBarItem(
             icon: Icon(Icons.restaurant),
             label: 'Nutrition',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.show_chart_rounded),
+            label: 'Progress',
           ),
           BottomNavigationBarItem(
             icon: Icon(

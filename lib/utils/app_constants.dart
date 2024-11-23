@@ -61,3 +61,16 @@ class AppConstants {
     "waist",
   ];
 }
+
+final List<Map<String, String>> bodyParts = [
+  {"name": "back", "image": "asset/image/Back/Back (4).jpg"},
+  {"name": "cardio", "image": "asset/image/Cardio/cardio.jpg"},
+  {"name": "chest", "image": "asset/image/Chest/Cardio (5).jpg"},
+  {"name": "lower arms", "image": "asset/image/L&U Arms/Arms (8).jpg"},
+  {"name": "upper arms", "image": "asset/image/L&U Arms/Arms (5).jpg"},
+  {"name": "lower legs", "image": "asset/image/U&L Legs/Legs (9).jpg"},
+  {"name": "upper legs", "image": "asset/image/U&L Legs/Legs (13).jpg"},
+  {"name": "neck", "image": "asset/image/Neck/Neck (1).jpg"},
+  {"name": "shoulders", "image": "asset/image/Shoulders/shoulders.jpg"},
+  {"name": "waist", "image": "asset/image/Waist/Waist (1).jpg"},
+];

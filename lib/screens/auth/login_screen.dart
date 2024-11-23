@@ -1,3 +1,4 @@
+import 'package:fitnesapp/screens/main_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:fitnesapp/services/firebase_auth_service.dart'; // Adjust the path as necessary
 import 'package:fitnesapp/screens/auth/signup_screen.dart'; // Adjust the path as necessary
@@ -30,7 +31,7 @@ class _LoginScreenState extends State<LoginScreen> {
         emailController, passwordController);
     Navigator.pushReplacement(
       context,
-      MaterialPageRoute(builder: (context) => HomeScreen()),
+      MaterialPageRoute(builder: (context) => const MainScreen()),
     );
   }
 

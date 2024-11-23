@@ -15,8 +15,9 @@ class ExerciseDetailBottomSheet extends StatelessWidget {
         decoration: const BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              Color(0xFF0073FE), // Top-left color
-              Color(0xFF0054FF), // Bottom-right color
+              // Top-left color
+              AppConstants.secondaryColor,
+              AppConstants.purple, // Bottom-right color
             ],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
