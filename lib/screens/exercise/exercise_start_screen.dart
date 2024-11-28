@@ -1,10 +1,9 @@
 import 'package:fitnesapp/utils/app_constants.dart';
 import 'package:flutter/material.dart';
 import '../../models/exercise.dart';
-
 import 'congratulation_screen.dart';
-
 import 'package:fitnesapp/widgets/exercise_progress_bar.dart';
+import 'dart:async';
 
 class ExerciseStartScreen extends StatefulWidget {
   final List<Exercise> exercises;
@@ -39,7 +38,7 @@ class _ExerciseStartScreenState extends State<ExerciseStartScreen> {
     } else {
       // If we are in the rest period, go to the next exercise after rest
 
-      if (currentExerciseIndex < widget.exercises.length - 1) {
+      if (currentExerciseIndex < widget.exercises.length - 2) {
         setState(() {
           currentExerciseIndex++;
           currentExercise = widget.exercises[currentExerciseIndex];
@@ -58,17 +57,19 @@ class _ExerciseStartScreenState extends State<ExerciseStartScreen> {
 
   void startRestTimer() {
     // Start the 30-second rest period
-    Future.delayed(const Duration(seconds: 1), () {
+    Future timer = Future.delayed(const Duration(seconds: 1), () {
       if (remainingSeconds > 0) {
         setState(() {
           remainingSeconds--;
         });
         startRestTimer(); // Continue the countdown
       }
-      if (remainingSeconds == 0) {
-        goToNextExercise();
-      }
     });
+
+    if (remainingSeconds == 0 &&
+        currentExerciseIndex < widget.exercises.length - 1) {
+      goToNextExercise();
+    }
   }
 
   void cancelExercise() {
@@ -83,6 +84,14 @@ class _ExerciseStartScreenState extends State<ExerciseStartScreen> {
     // Go back to the Exercise when the user wants to go back
     setState(() {
       currentExerciseIndex--;
+      currentExercise = widget.exercises[currentExerciseIndex];
+    });
+  }
+
+  void skipExercise() {
+    // Go back to the Exercise when the user wants to go back
+    setState(() {
+      currentExerciseIndex++;
       currentExercise = widget.exercises[currentExerciseIndex];
     });
   }
