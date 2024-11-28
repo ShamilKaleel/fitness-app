@@ -15,3 +15,8 @@ String rgbToHex(Color color) {
 Color hexToColor(String hex) {
   return Color(int.parse(hex, radix: 16) + 0xFF000000);
 }
+
+String capitalizeFirstLetter(String input) {
+  if (input.isEmpty) return input; // Return as-is if string is empty
+  return input[0].toUpperCase() + input.substring(1).toLowerCase();
+}

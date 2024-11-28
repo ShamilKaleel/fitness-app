@@ -21,6 +21,8 @@ class _ExerciseStartScreenState extends State<ExerciseStartScreen> {
 
   late Exercise currentExercise;
 
+  Timer? restTimer; // Add a Timer object to manage the countdown
+
   @override
   void initState() {
     super.initState();
@@ -28,6 +30,9 @@ class _ExerciseStartScreenState extends State<ExerciseStartScreen> {
   }
 
   void goToNextExercise() {
+    if (restTimer != null) {
+      restTimer!.cancel(); // Cancel any active timers before proceeding
+    }
     // Start the rest period if it's not already rest time
     if (!isRestPeriod) {
       setState(() {
@@ -37,39 +42,51 @@ class _ExerciseStartScreenState extends State<ExerciseStartScreen> {
       startRestTimer();
     } else {
       // If we are in the rest period, go to the next exercise after rest
-
-      if (currentExerciseIndex < widget.exercises.length - 2) {
-        setState(() {
-          currentExerciseIndex++;
-          currentExercise = widget.exercises[currentExerciseIndex];
-          isRestPeriod = false;
-        });
-      } else {
-        // End of exercises, navigate to the congratulation screen
+      if (currentExerciseIndex == widget.exercises.length - 1) {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
               builder: (context) => const CongratulationsScreen()),
         );
       }
+      if (currentExerciseIndex < widget.exercises.length - 1) {
+        setState(() {
+          currentExerciseIndex++;
+          currentExercise = widget.exercises[currentExerciseIndex];
+          isRestPeriod = false;
+        });
+      }
     }
   }
 
+  @override
+  void dispose() {
+    // Cancel the timer when the widget is disposed
+    restTimer?.cancel();
+    super.dispose();
+  }
+
   void startRestTimer() {
+    // Ensure no overlapping timers
+    restTimer?.cancel();
+
     // Start the 30-second rest period
-    Future timer = Future.delayed(const Duration(seconds: 1), () {
+    restTimer = Timer.periodic(const Duration(seconds: 1), (timer) {
       if (remainingSeconds > 0) {
         setState(() {
           remainingSeconds--;
         });
         startRestTimer(); // Continue the countdown
+      } else {
+        timer.cancel();
+        goToNextExercise();
       }
     });
 
-    if (remainingSeconds == 0 &&
-        currentExerciseIndex < widget.exercises.length - 1) {
-      goToNextExercise();
-    }
+    // if (remainingSeconds == 0 &&
+    //     currentExerciseIndex < widget.exercises.length - 1) {
+    //   goToNextExercise();
+    // }
   }
 
   void cancelExercise() {
@@ -89,11 +106,23 @@ class _ExerciseStartScreenState extends State<ExerciseStartScreen> {
   }
 
   void skipExercise() {
-    // Go back to the Exercise when the user wants to go back
-    setState(() {
-      currentExerciseIndex++;
-      currentExercise = widget.exercises[currentExerciseIndex];
-    });
+    // Cancel the current timer before skipping
+    if (restTimer != null) {
+      restTimer!.cancel();
+    }
+    if (currentExerciseIndex == widget.exercises.length - 1) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const CongratulationsScreen()),
+      );
+    }
+    if (currentExerciseIndex < widget.exercises.length - 1) {
+      setState(() {
+        currentExerciseIndex++;
+        currentExercise = widget.exercises[currentExerciseIndex];
+        isRestPeriod = false; // Skip directly to the next exercise
+      });
+    }
   }
 
   void addTime() {
@@ -101,7 +130,6 @@ class _ExerciseStartScreenState extends State<ExerciseStartScreen> {
     setState(() {
       remainingSeconds += 20;
     });
-    startRestTimer();
   }
 
   @override
@@ -156,15 +184,22 @@ class _ExerciseStartScreenState extends State<ExerciseStartScreen> {
                                   children: [
                                     const SizedBox(height: 10),
                                     Text(
-                                      widget.exercises[currentExerciseIndex + 1]
-                                                  .name.length >
-                                              30
-                                          ? '${widget.exercises[currentExerciseIndex + 1].name.substring(0, 30).toUpperCase()}...'
-                                          : widget
-                                              .exercises[
-                                                  currentExerciseIndex + 1]
-                                              .name
-                                              .toUpperCase(),
+                                      currentExerciseIndex + 1 <
+                                              widget.exercises.length
+                                          ? widget
+                                                      .exercises[
+                                                          currentExerciseIndex +
+                                                              1]
+                                                      .name
+                                                      .length >
+                                                  30
+                                              ? '${widget.exercises[currentExerciseIndex + 1].name.substring(0, 30).toUpperCase()}...'
+                                              : widget
+                                                  .exercises[
+                                                      currentExerciseIndex + 1]
+                                                  .name
+                                                  .toUpperCase()
+                                          : 'No more exercises',
                                       style: const TextStyle(
                                           color: Colors.black,
                                           fontSize: 16,
@@ -268,7 +303,10 @@ class _ExerciseStartScreenState extends State<ExerciseStartScreen> {
                                       padding: const EdgeInsets.symmetric(
                                           horizontal: 30.0),
                                       child: TextButton(
-                                        onPressed: goToNextExercise,
+                                        onPressed: currentExerciseIndex ==
+                                                widget.exercises.length - 1
+                                            ? cancelExercise
+                                            : goToNextExercise,
                                         child: const Icon(
                                           Icons.check,
                                           color: Colors.white,
@@ -286,7 +324,10 @@ class _ExerciseStartScreenState extends State<ExerciseStartScreen> {
                                             40), // Rounded border
                                       ),
                                       child: IconButton(
-                                        onPressed: goToNextExercise,
+                                        onPressed: currentExerciseIndex ==
+                                                widget.exercises.length - 1
+                                            ? cancelExercise
+                                            : goToNextExercise,
                                         icon: const Icon(
                                           Icons.skip_next,
                                           color: Colors.black,
@@ -392,7 +433,7 @@ class _ExerciseStartScreenState extends State<ExerciseStartScreen> {
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 30.0),
                                   child: TextButton(
-                                    onPressed: goToNextExercise,
+                                    onPressed: skipExercise,
                                     child: const Text(
                                       'SKIP',
                                       style: TextStyle(
@@ -415,7 +456,10 @@ class _ExerciseStartScreenState extends State<ExerciseStartScreen> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  'NEXT ${currentExerciseIndex + 1}/${widget.exercises.length}',
+                                  currentExerciseIndex + 1 <
+                                          widget.exercises.length
+                                      ? 'NEXT ${currentExerciseIndex + 1}/${widget.exercises.length}'
+                                      : 'No more exercises',
                                   style: const TextStyle(
                                       fontSize: 18, color: Colors.white),
                                 ),
@@ -428,15 +472,22 @@ class _ExerciseStartScreenState extends State<ExerciseStartScreen> {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
-                                      widget.exercises[currentExerciseIndex + 1]
-                                                  .name.length >
-                                              22
-                                          ? '${widget.exercises[currentExerciseIndex + 1].name.substring(0, 22).toUpperCase()}...'
-                                          : widget
-                                              .exercises[
-                                                  currentExerciseIndex + 1]
-                                              .name
-                                              .toUpperCase(),
+                                      currentExerciseIndex + 1 <
+                                              widget.exercises.length
+                                          ? widget
+                                                      .exercises[
+                                                          currentExerciseIndex +
+                                                              1]
+                                                      .name
+                                                      .length >
+                                                  22
+                                              ? '${widget.exercises[currentExerciseIndex + 1].name.substring(0, 22).toUpperCase()}...'
+                                              : widget
+                                                  .exercises[
+                                                      currentExerciseIndex + 1]
+                                                  .name
+                                                  .toUpperCase()
+                                          : 'No more exercises',
                                       style: const TextStyle(
                                           fontSize: 22,
                                           fontWeight: FontWeight.bold,
@@ -470,29 +521,6 @@ class _ExerciseStartScreenState extends State<ExerciseStartScreen> {
                           ),
                         ],
                       ),
-
-                // ElevatedButton(
-                //   onPressed: cancelExercise,
-                //   child: const Text('Cancel and Go Back'),
-                // ),
-                // const SizedBox(height: 10),
-                // ElevatedButton(
-                //   onPressed: goToNextExercise,
-                //   child: const Text('Next Exercise'),
-                // ),
-                // const SizedBox(
-                //   height: 20,
-                //   width: double.infinity,
-                // ),
-                // ElevatedButton(
-                //   onPressed: cancelExercise,
-                //   child: const Text('Cancel and Go Back'),
-                // ),
-                // const SizedBox(height: 10),
-                // ElevatedButton(
-                //   onPressed: goToNextExercise,
-                //   child: const Text('Next Exercise'),
-                // ),
               ],
             ),
           ),

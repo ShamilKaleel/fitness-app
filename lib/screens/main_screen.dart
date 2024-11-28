@@ -18,11 +18,10 @@ class _MainScreenState extends State<MainScreen> {
 
   // List of screens for navigation
   final List<Widget> _screens = [
-    HomeScreen(), // Just the content for the home tab
-    NutritionScreen(),
-    ProgressScreen(),
-    BMIScreen(),
-    ProfileScreen(),
+    HomeScreen(),
+    const BMIScreen(),
+    const ProgressScreen(),
+    const NutritionScreen(),
   ];
 
   @override
@@ -48,22 +47,18 @@ class _MainScreenState extends State<MainScreen> {
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.restaurant),
-            label: 'Nutrition',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.show_chart_rounded),
-            label: 'Progress',
-          ),
-          BottomNavigationBarItem(
             icon: Icon(
               Icons.fitness_center,
             ),
             label: 'BMI',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Profile',
+            icon: Icon(Icons.show_chart_rounded),
+            label: 'Progress',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.restaurant),
+            label: 'Nutrition',
           ),
         ],
       ),

@@ -5,6 +5,7 @@ import '../../models/exercise.dart';
 import 'timer_screen.dart';
 import '../../widgets/gradient_button.dart';
 import '../../widgets/card_exercise.dart';
+import 'package:fitnesapp/utils/formatters.dart';
 import 'exercise_detail_screen.dart';
 import '../../widgets/exercise_detail_bottom_sheet.dart';
 
@@ -30,7 +31,7 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('${widget.bodyPart} Exercises'),
+        title: Text('${capitalizeFirstLetter(widget.bodyPart)} Exercises'),
       ),
       body: FutureBuilder<List<Exercise>>(
         future: exercises,

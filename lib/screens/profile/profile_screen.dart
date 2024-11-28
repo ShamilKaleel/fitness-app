@@ -1,3 +1,5 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fitnesapp/services/firebase_auth_service.dart';
 import 'package:flutter/material.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -42,9 +44,9 @@ class ProfileScreen extends StatelessWidget {
                         'https://example.com/profile.jpg'), // Replace with actual URL
                   ),
                   const SizedBox(height: 12),
-                  const Text(
-                    'Madison Smith',
-                    style: TextStyle(
+                  Text(
+                    FirebaseAuth.instance.currentUser!.email!,
+                    style: const TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
                       fontSize: 18,

@@ -74,4 +74,12 @@ class AppConstants {
     {"name": "shoulders", "image": "asset/image/Shoulders/Shoulders (5).jpg"},
     {"name": "waist", "image": "asset/image/Waist/Waist (1).jpg"},
   ];
+
+// List of BMI categories
+  static const List<Map<String, String>> bmiCategories = [
+    {"category": "Underweight", "range": "BMI < 18.5"},
+    {"category": "Normal weight", "range": "BMI 18.5-24.9"},
+    {"category": "Overweight", "range": "BMI 25-29.9"},
+    {"category": "Obesity", "range": "BMI ≥ 30"},
+  ];
 }

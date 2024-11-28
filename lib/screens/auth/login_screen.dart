@@ -2,8 +2,8 @@ import 'package:fitnesapp/screens/main_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:fitnesapp/services/firebase_auth_service.dart'; // Adjust the path as necessary
 import 'package:fitnesapp/screens/auth/signup_screen.dart'; // Adjust the path as necessary
-import 'package:fitnesapp/screens/home_screen.dart'; // Adjust the path as necessary
 import 'package:fitnesapp/utils/app_constants.dart'; // Add this import
+import 'package:firebase_auth/firebase_auth.dart';
 
 class LoginScreen extends StatefulWidget {
   static route() => MaterialPageRoute(
@@ -27,13 +27,27 @@ class _LoginScreenState extends State<LoginScreen> {
     super.dispose();
   }
 
-  Future<void> login() async {
-    await authService.loginUserWithEmailAndPassword(
-        emailController, passwordController);
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(builder: (context) => const MainScreen()),
-    );
+  Future<void> loginUserWithEmailAndPassword() async {
+    try {
+      final userCredential =
+          await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: emailController.text.trim(),
+        password: passwordController.text.trim(),
+      );
+      print(userCredential.user);
+      FirebaseAuth.instance.authStateChanges().listen((User? user) {
+        if (user != null) {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const MainScreen(),
+            ),
+          );
+        }
+      });
+    } on FirebaseAuthException catch (e) {
+      print(e);
+    }
   }
 
   @override
@@ -72,7 +86,7 @@ class _LoginScreenState extends State<LoginScreen> {
               const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () async {
-                  await login();
+                  await loginUserWithEmailAndPassword();
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: AppConstants.secondaryColor,
