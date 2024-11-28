@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:fitnesapp/services/firebase_auth_service.dart'; // Adjust the path as necessary
 import 'package:fitnesapp/screens/auth/signup_screen.dart'; // Adjust the path as necessary
 import 'package:fitnesapp/screens/home_screen.dart'; // Adjust the path as necessary
+import 'package:fitnesapp/utils/app_constants.dart'; // Add this import
 
 class LoginScreen extends StatefulWidget {
   static route() => MaterialPageRoute(
@@ -49,9 +50,9 @@ class _LoginScreenState extends State<LoginScreen> {
               const Text(
                 'Login.',
                 style: TextStyle(
-                  fontSize: 50,
-                  fontWeight: FontWeight.bold,
-                ),
+                    fontSize: 50,
+                    fontWeight: FontWeight.bold,
+                    color: AppConstants.yellow),
               ),
               const SizedBox(height: 30),
               TextFormField(
@@ -73,6 +74,13 @@ class _LoginScreenState extends State<LoginScreen> {
                 onPressed: () async {
                   await login();
                 },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: AppConstants.secondaryColor,
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 50,
+                    vertical: 10,
+                  ),
+                ),
                 child: const Text(
                   'SIGN IN',
                   style: TextStyle(

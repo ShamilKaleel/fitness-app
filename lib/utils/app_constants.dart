@@ -60,17 +60,18 @@ class AppConstants {
     "upper legs",
     "waist",
   ];
-}
 
-final List<Map<String, String>> bodyParts = [
-  {"name": "back", "image": "asset/image/Back/Back (4).jpg"},
-  {"name": "cardio", "image": "asset/image/Cardio/cardio.jpg"},
-  {"name": "chest", "image": "asset/image/Chest/Cardio (5).jpg"},
-  {"name": "lower arms", "image": "asset/image/L&U Arms/Arms (8).jpg"},
-  {"name": "upper arms", "image": "asset/image/L&U Arms/Arms (5).jpg"},
-  {"name": "lower legs", "image": "asset/image/U&L Legs/Legs (9).jpg"},
-  {"name": "upper legs", "image": "asset/image/U&L Legs/Legs (13).jpg"},
-  {"name": "neck", "image": "asset/image/Neck/Neck (1).jpg"},
-  {"name": "shoulders", "image": "asset/image/Shoulders/shoulders.jpg"},
-  {"name": "waist", "image": "asset/image/Waist/Waist (1).jpg"},
-];
+// List of body parts with images
+  static const List<Map<String, String>> bodyPartsImage = [
+    {"name": "back", "image": "asset/image/Back/Back (4).jpg"},
+    {"name": "cardio", "image": "asset/image/Cardio/Cardio (5).jpg"},
+    {"name": "chest", "image": "asset/image/Chest/Chest (2).jpg"},
+    {"name": "lower arms", "image": "asset/image/L&U Arms/Arms (8).jpg"},
+    {"name": "upper arms", "image": "asset/image/L&U Arms/Arms (5).jpg"},
+    {"name": "lower legs", "image": "asset/image/U&L Legs/Legs (9).jpg"},
+    {"name": "upper legs", "image": "asset/image/U&L Legs/Legs (13).jpg"},
+    {"name": "neck", "image": "asset/image/Neck/Neck (1).jpg"},
+    {"name": "shoulders", "image": "asset/image/Shoulders/Shoulders (5).jpg"},
+    {"name": "waist", "image": "asset/image/Waist/Waist (1).jpg"},
+  ];
+}

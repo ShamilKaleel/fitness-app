@@ -16,24 +16,21 @@ void main() async {
     themeMode: ThemeMode.dark, // Set the default theme mode to dark
     darkTheme: ThemeData(
       brightness: Brightness.dark,
-      primaryColor: Color(0xFF007E85), // Custom primary color
-      colorScheme: ColorScheme.dark(
-        secondary: Colors.tealAccent,
-      ),
+
       scaffoldBackgroundColor: AppConstants.bgcColor,
-      appBarTheme: AppBarTheme(
+      appBarTheme: const AppBarTheme(
         backgroundColor: AppConstants.bgcColor,
         iconTheme: IconThemeData(color: AppConstants.yellow),
       ),
-      textTheme: TextTheme(
+      textTheme: const TextTheme(
         bodyLarge: TextStyle(color: Colors.white),
         bodyMedium: TextStyle(color: Colors.white70),
       ),
-      buttonTheme: ButtonThemeData(
-        buttonColor: Color(0xFF007E85), // Custom button color
-        textTheme: ButtonTextTheme.primary,
-      ),
-      bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      // buttonTheme: ButtonThemeData(
+      //   buttonColor: Color(0xFF007E85), // Custom button color
+      //   textTheme: ButtonTextTheme.primary,
+      // ),
+      bottomNavigationBarTheme: const BottomNavigationBarThemeData(
         backgroundColor: AppConstants.purple, // Background color
         selectedItemColor: Colors.tealAccent, // Selected item color
         unselectedItemColor: Colors.white70, // Unselected item color

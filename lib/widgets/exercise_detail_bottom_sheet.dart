@@ -17,7 +17,7 @@ class ExerciseDetailBottomSheet extends StatelessWidget {
             colors: [
               // Top-left color
               AppConstants.secondaryColor,
-              AppConstants.purple, // Bottom-right color
+              AppConstants.secondaryColor, // Bottom-right color
             ],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
@@ -69,7 +69,7 @@ class ExerciseDetailBottomSheet extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
-                  color: Color(0xFF896CFE),
+                  color: AppConstants.yellow,
                 ),
               ),
               Padding(
@@ -85,7 +85,7 @@ class ExerciseDetailBottomSheet extends StatelessWidget {
                 style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
-                    color: Color(0xFF1953F0)),
+                    color: AppConstants.yellow),
               ),
               exercise.instructions[1].isNotEmpty
                   ? Padding(
@@ -109,16 +109,19 @@ class ExerciseDetailBottomSheet extends StatelessWidget {
               const Text(
                 "SECONDARY MUSCLES",
                 style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                    color: Color(0xFF1953F0)),
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: AppConstants.yellow,
+                ),
               ),
               ...exercise.secondaryMuscles.map((muscle) {
                 return Padding(
                   padding: const EdgeInsets.only(top: 8.0),
                   child: Text(
                     muscle,
-                    style: const TextStyle(fontSize: 16),
+                    style: const TextStyle(
+                      fontSize: 16,
+                    ),
                   ),
                 );
               }),

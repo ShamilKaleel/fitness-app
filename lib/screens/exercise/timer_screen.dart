@@ -1,3 +1,4 @@
+import 'package:fitnesapp/utils/app_constants.dart';
 import 'package:flutter/material.dart';
 import '../../models/exercise.dart';
 import 'exercise_start_screen.dart';
@@ -12,7 +13,7 @@ class TimerScreen extends StatefulWidget {
 }
 
 class _TimerScreenState extends State<TimerScreen> {
-  int remainingSeconds = 10;
+  int remainingSeconds = 2000;
 
   @override
   void initState() {
@@ -56,39 +57,81 @@ class _TimerScreenState extends State<TimerScreen> {
         decoration: const BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              Color(0xFF0073FE), // Top-left color
-              Color(0xFF0054FF), // Bottom-right color
+              AppConstants.purple, // Top-left color
+              AppConstants.secondaryColor, // Bottom-right color
             ],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
         ),
-        child: Center(
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  'Starting in $remainingSeconds seconds...',
-                  style: const TextStyle(
-                      fontSize: 24, fontWeight: FontWeight.bold),
-                ),
-                const SizedBox(height: 40),
-                ElevatedButton(
-                  onPressed: skipTimer,
-                  child: const Text('Skip Timer'),
-                ),
-                const SizedBox(height: 10),
-                ElevatedButton(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Stack(
+            children: [
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text(
+                    "READY TO GO",
+                    style: TextStyle(
+                      fontSize: 38,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                  ),
+                  Text(
+                    ' $remainingSeconds ',
+                    style: const TextStyle(
+                        fontSize: 130,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white),
+                  ),
+                  const SizedBox(height: 20),
+                  Text(
+                    'Exercises: 1/${widget.exercises.length}',
+                    style: const TextStyle(fontSize: 20, color: Colors.white),
+                  ),
+                  const SizedBox(height: 10),
+                  Text(
+                    ' ${widget.exercises[0].name.toUpperCase()} ',
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                        fontSize: 25,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white),
+                  ),
+                  const SizedBox(height: 100),
+                  ElevatedButton(
+                    onPressed: skipTimer,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.white,
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 100,
+                        vertical: 10,
+                      ),
+                    ),
+                    child: const Text(
+                      'Start!',
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              Positioned(
+                top: 50,
+                left: 5,
+                child: TextButton(
                   onPressed: cancelWorkout,
                   style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color.fromARGB(255, 45, 35, 236)),
-                  child: const Text('Cancel Workout',
-                      style: TextStyle(color: Colors.white)),
+                      backgroundColor: Colors.transparent),
+                  child: const Icon(Icons.close, color: Colors.white, size: 30),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),

@@ -66,6 +66,14 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - asset/image/
+    - asset/image/Back/
+    - asset/image/Cardio/
+    - asset/image/Chest/
+    - asset/image/Shoulders/
+    - asset/image/L&U Arms/
+    - asset/image/Neck/
+    - asset/image/U&L Legs/
+    - asset/image/Waist/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

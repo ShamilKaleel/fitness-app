@@ -1,7 +1,8 @@
 import 'package:fitnesapp/utils/app_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:fitnesapp/screens/exercise/exercise_screen.dart';
-import 'package:fitnesapp/services/firebase_auth_service.dart'; // Add this line to import the FirebaseAuthService
+import 'package:fitnesapp/services/firebase_auth_service.dart';
+import 'package:fitnesapp/widgets/card_body.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
@@ -15,7 +16,23 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Choose Body Part'),
+        title: const Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text('Workouts',
+                style: TextStyle(
+                    fontSize: 24,
+                    color: AppConstants.secondaryColor,
+                    fontWeight: FontWeight.bold),
+                textAlign: TextAlign.left),
+            Text(
+              'Choose a body part to get started!',
+              style: TextStyle(
+                fontSize: 12,
+              ),
+            ),
+          ],
+        ),
         actions: [
           IconButton(
               icon: const Icon(Icons.person, color: Color(0xFF896CFE)),
@@ -24,27 +41,17 @@ class HomeScreen extends StatelessWidget {
               }),
         ],
       ),
-      body: ListView.builder(
-        itemCount: bodyParts.length,
-        itemBuilder: (context, index) {
-          final bodyPart = bodyParts[index];
-          return ListTile(
-            title: Text(
-              bodyPart[0].toUpperCase() + bodyPart.substring(1),
-              style: const TextStyle(
-                fontSize: 18,
-              ),
-            ),
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => ExerciseScreen(bodyPart: bodyPart),
-                ),
-              );
-            },
-          );
-        },
+      body: Padding(
+        padding: const EdgeInsets.only(top: 25.0),
+        child: ListView.builder(
+          itemCount: AppConstants.bodyPartsImage.length,
+          itemBuilder: (context, index) {
+            return CardBody(
+              bodyPart: (AppConstants.bodyPartsImage[index]['name'] as String),
+              imageURL: AppConstants.bodyPartsImage[index]['image'] as String,
+            );
+          },
+        ),
       ),
     );
   }
