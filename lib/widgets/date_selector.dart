@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class DateSelector extends StatefulWidget {
-  const DateSelector({super.key});
+  final Function(DateTime) onDateChanged; // Callback to notify date changes
+
+  const DateSelector({super.key, required this.onDateChanged});
 
   @override
   State<DateSelector> createState() => _DateSelectorState();
@@ -79,11 +81,11 @@ class _DateSelectorState extends State<DateSelector> {
                     setState(() {
                       selectedDate = date;
                     });
+                    widget.onDateChanged(selectedDate); // Notify parent widget
                   },
                   child: Container(
                     width: 70,
-                    margin:
-                        const EdgeInsets.only(right: 8), // Space between items
+                    margin: const EdgeInsets.only(right: 8),
                     decoration: BoxDecoration(
                       color: isSelected
                           ? AppConstants.yellow
@@ -100,7 +102,7 @@ class _DateSelectorState extends State<DateSelector> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          DateFormat('d').format(date), // Day of the month
+                          DateFormat('d').format(date),
                           style: TextStyle(
                             color: isSelected
                                 ? const Color.fromARGB(221, 0, 0, 0)
@@ -111,8 +113,7 @@ class _DateSelectorState extends State<DateSelector> {
                         ),
                         const SizedBox(height: 3),
                         Text(
-                          DateFormat('E')
-                              .format(date), // Short weekday (Mon, Tue, etc.)
+                          DateFormat('E').format(date),
                           style: TextStyle(
                             color: isSelected
                                 ? const Color.fromARGB(221, 109, 106, 106)

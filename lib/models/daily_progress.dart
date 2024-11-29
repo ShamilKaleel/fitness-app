@@ -1,3 +1,5 @@
+import 'package:intl/intl.dart';
+
 class DailyProgress {
   final int id;
   final int doneExercise;
@@ -21,7 +23,7 @@ class DailyProgress {
       'id': id,
       'doneExercise': doneExercise,
       'totalExercise': totalExercise,
-      'date': date.toIso8601String(),
+      'date': DateFormat('yyyy-MM-dd').format(date),
       'userId': userId,
       'bodyPart': bodyPart,
     };

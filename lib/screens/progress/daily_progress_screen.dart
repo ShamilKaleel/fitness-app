@@ -16,6 +16,7 @@ class _DailyProgressScreenState extends State<DailyProgressScreen> {
   final DailyProgressService _service = DailyProgressService();
   List<DailyProgress> _progressList = [];
   bool _isLoading = true;
+  DateTime _selectedDate = DateTime.now();
 
   @override
   void initState() {
@@ -24,8 +25,12 @@ class _DailyProgressScreenState extends State<DailyProgressScreen> {
   }
 
   Future<void> _fetchDailyProgress() async {
+    setState(() {
+      _isLoading = true;
+    });
+
     try {
-      final data = await _service.getAllDailyProgress();
+      final data = await _service.getDailyProgressByDate(_selectedDate);
       setState(() {
         _progressList = data;
         _isLoading = false;
@@ -37,6 +42,13 @@ class _DailyProgressScreenState extends State<DailyProgressScreen> {
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text('Error fetching data: $e')));
     }
+  }
+
+  void _onDateChanged(DateTime date) {
+    setState(() {
+      _selectedDate = date;
+    });
+    _fetchDailyProgress(); // Fetch progress for the new date
   }
 
   void _navigateToForm({DailyProgress? progress}) async {
@@ -54,37 +66,48 @@ class _DailyProgressScreenState extends State<DailyProgressScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Daily Progress')),
+      appBar: AppBar(title: const Text('Daily Progress')),
       body: Column(
         children: [
-          const DateSelector(),
+          // Pass the callback for date change
+          DateSelector(
+            onDateChanged: _onDateChanged,
+          ),
           _isLoading
-              ? Center(child: CircularProgressIndicator())
+              ? const Center(child: CircularProgressIndicator())
               : Expanded(
-                  child: ListView.builder(
-                    itemCount: _progressList.length,
-                    itemBuilder: (context, index) {
-                      final progress = _progressList[index];
-                      return ListTile(
-                        title: Text('Body Part: ${progress.bodyPart}'),
-                        subtitle: Text(
-                          'Date: ${DateFormat('yyyy-MM-dd').format(progress.date)}\n'
-                          'Exercises: ${progress.doneExercise}/${progress.totalExercise}',
+                  child: _progressList.isEmpty
+                      ? const Center(
+                          child: Text(
+                            'No progress for this date',
+                            style: TextStyle(fontSize: 16),
+                          ),
+                        )
+                      : ListView.builder(
+                          itemCount: _progressList.length,
+                          itemBuilder: (context, index) {
+                            final progress = _progressList[index];
+                            return ListTile(
+                              title: Text('Body Part: ${progress.bodyPart}'),
+                              subtitle: Text(
+                                'Date: ${DateFormat('yyyy-MM-dd').format(progress.date)}\n'
+                                'Exercises: ${progress.doneExercise}/${progress.totalExercise}',
+                              ),
+                              trailing: IconButton(
+                                icon:
+                                    const Icon(Icons.delete, color: Colors.red),
+                                onPressed: () => _deleteProgress(progress.id),
+                              ),
+                              onTap: () => _navigateToForm(progress: progress),
+                            );
+                          },
                         ),
-                        trailing: IconButton(
-                          icon: Icon(Icons.delete, color: Colors.red),
-                          onPressed: () => _deleteProgress(progress.id),
-                        ),
-                        onTap: () => _navigateToForm(progress: progress),
-                      );
-                    },
-                  ),
                 ),
         ],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => _navigateToForm(),
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
       ),
     );
   }
@@ -93,7 +116,7 @@ class _DailyProgressScreenState extends State<DailyProgressScreen> {
     try {
       await _service.deleteDailyProgress(id);
       ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text('Deleted successfully!')));
+          .showSnackBar(const SnackBar(content: Text('Deleted successfully!')));
       _fetchDailyProgress();
     } catch (e) {
       ScaffoldMessenger.of(context)

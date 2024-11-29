@@ -49,7 +49,7 @@ class _ProgressScreenState extends State<ProgressScreen> {
       body: Center(
         child: Column(
           children: [
-            const DateSelector(),
+            //const DateSelector(),
             StreamBuilder(
               stream: FirebaseFirestore.instance
                   .collection('history')

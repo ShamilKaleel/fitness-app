@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fitnesapp/models/daily_progress.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:intl/intl.dart';
 
 class DailyProgressService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -35,7 +37,7 @@ class DailyProgressService {
 
   /// Get DailyProgress by date and userId
   Future<List<DailyProgress>> getDailyProgressByDateAndUser(
-      DateTime date, int userId) async {
+      DateTime date, String userId) async {
     try {
       final snapshot = await _firestore
           .collection(collectionName)
@@ -71,6 +73,25 @@ class DailyProgressService {
     } catch (e) {
       print('Error deleting DailyProgress: $e');
       throw Exception('Failed to delete daily progress.');
+    }
+  }
+
+  Future<List<DailyProgress>> getDailyProgressByDate(DateTime date) async {
+    try {
+      String formattedDate =
+          DateFormat('yyyy-MM-dd').format(date); // Format the date
+      final snapshot = await _firestore
+          .collection(collectionName)
+          .where('userId', isEqualTo: FirebaseAuth.instance.currentUser?.uid)
+          .where('date', isEqualTo: formattedDate) // Compare only `yyyy-MM-dd`
+          .get();
+
+      return snapshot.docs
+          .map((doc) => DailyProgress.fromMap(doc.data()))
+          .toList();
+    } catch (e) {
+      print('Error fetching DailyProgress for date: $e');
+      throw Exception('Failed to fetch progress for the selected date.');
     }
   }
 }
