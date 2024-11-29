@@ -103,8 +103,8 @@ class _DateSelectorState extends State<DateSelector> {
                           DateFormat('d').format(date), // Day of the month
                           style: TextStyle(
                             color: isSelected
-                                ? Color.fromARGB(221, 0, 0, 0)
-                                : Color.fromARGB(221, 0, 0, 0),
+                                ? const Color.fromARGB(221, 0, 0, 0)
+                                : const Color.fromARGB(221, 0, 0, 0),
                             fontSize: 22,
                             fontWeight: FontWeight.bold,
                           ),
@@ -115,8 +115,8 @@ class _DateSelectorState extends State<DateSelector> {
                               .format(date), // Short weekday (Mon, Tue, etc.)
                           style: TextStyle(
                             color: isSelected
-                                ? Color.fromARGB(221, 109, 106, 106)
-                                : Color.fromARGB(221, 109, 106, 106),
+                                ? const Color.fromARGB(221, 109, 106, 106)
+                                : const Color.fromARGB(221, 109, 106, 106),
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
                           ),

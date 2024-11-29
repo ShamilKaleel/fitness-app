@@ -1,3 +1,5 @@
+import 'package:fitnesapp/models/daily_progress.dart';
+import 'package:fitnesapp/screens/progress/daily_progress_screen.dart';
 import 'package:fitnesapp/utils/app_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:fitnesapp/screens/home_screen.dart';
@@ -20,8 +22,8 @@ class _MainScreenState extends State<MainScreen> {
   final List<Widget> _screens = [
     HomeScreen(),
     const BMIScreen(),
-    const ProgressScreen(),
-    const NutritionScreen(),
+    const DailyProgressScreen(),
+    NutritionScreen(),
   ];
 
   @override

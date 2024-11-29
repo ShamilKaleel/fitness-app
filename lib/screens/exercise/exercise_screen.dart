@@ -1,4 +1,3 @@
-import 'package:fitnesapp/utils/app_constants.dart';
 import 'package:flutter/material.dart';
 import '../../services/api_service.dart';
 import '../../models/exercise.dart';
@@ -6,7 +5,6 @@ import 'timer_screen.dart';
 import '../../widgets/gradient_button.dart';
 import '../../widgets/card_exercise.dart';
 import 'package:fitnesapp/utils/formatters.dart';
-import 'exercise_detail_screen.dart';
 import '../../widgets/exercise_detail_bottom_sheet.dart';
 
 class ExerciseScreen extends StatefulWidget {

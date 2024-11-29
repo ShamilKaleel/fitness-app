@@ -1,4 +1,3 @@
-import 'package:fitnesapp/widgets/gradient_button.dart';
 import 'package:fitnesapp/utils/app_constants.dart';
 import 'package:flutter/material.dart';
 import '../../models/exercise.dart';

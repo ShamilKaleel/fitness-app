@@ -47,34 +47,4 @@ class FirebaseAuthService {
   User? getCurrentUser() {
     return _auth.currentUser;
   }
-
-  // Reset Password
-  Future<void> resetPassword(String email) async {
-    try {
-      await _auth.sendPasswordResetEmail(email: email);
-    } catch (e) {
-      print("Error in resetPassword: $e");
-      rethrow;
-    }
-  }
-
-  // Update Email
-  Future<void> updateEmail(String newEmail) async {
-    try {
-      await _auth.currentUser?.updateEmail(newEmail);
-    } catch (e) {
-      print("Error in updateEmail: $e");
-      rethrow;
-    }
-  }
-
-  // Update Password
-  Future<void> updatePassword(String newPassword) async {
-    try {
-      await _auth.currentUser?.updatePassword(newPassword);
-    } catch (e) {
-      print("Error in updatePassword: $e");
-      rethrow;
-    }
-  }
 }

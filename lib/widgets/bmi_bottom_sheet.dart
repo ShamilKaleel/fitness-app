@@ -3,17 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart'; // For circular gauge
 
 class BmiBottomSheet extends StatelessWidget {
-  BmiBottomSheet({super.key, required this.userBmi});
+  const BmiBottomSheet({super.key, required this.userBmi});
   final double userBmi;
 
-  final List<Map<String, dynamic>> bmiCategories = [
-    {"range": "BMI < 18.5", "category": "Underweight"},
-    {"range": "18.5–24.9", "category": "Healthy"},
-    {"range": "25–29.9", "category": "Overweight"},
-    {"range": "30–34.9", "category": "Obese"},
-    {"range": "35–39.9", "category": "Highly Obese"},
-    {"range": "40 >", "category": "Extremely Obese"},
-  ];
+  final List<Map<String, dynamic>> bmiCategories = AppConstants.bmiCategories;
 
   String getBmiCategory(double bmi) {
     if (bmi < 18.5) {

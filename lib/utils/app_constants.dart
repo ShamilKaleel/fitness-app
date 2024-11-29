@@ -76,10 +76,12 @@ class AppConstants {
   ];
 
 // List of BMI categories
-  static const List<Map<String, String>> bmiCategories = [
-    {"category": "Underweight", "range": "BMI < 18.5"},
-    {"category": "Normal weight", "range": "BMI 18.5-24.9"},
-    {"category": "Overweight", "range": "BMI 25-29.9"},
-    {"category": "Obesity", "range": "BMI ≥ 30"},
+  static const List<Map<String, dynamic>> bmiCategories = [
+    {"range": "BMI < 18.5", "category": "Underweight"},
+    {"range": "18.5–24.9", "category": "Healthy"},
+    {"range": "25–29.9", "category": "Overweight"},
+    {"range": "30–34.9", "category": "Obese"},
+    {"range": "35–39.9", "category": "Highly Obese"},
+    {"range": "40 >", "category": "Extremely Obese"},
   ];
 }

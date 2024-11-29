@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:fitnesapp/services/firebase_auth_service.dart';
 import 'package:fitnesapp/screens/auth/login_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 
 class SignupScreen extends StatefulWidget {
   static route() => MaterialPageRoute(
@@ -16,7 +17,7 @@ class _SignupScreenState extends State<SignupScreen> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final formKey = GlobalKey<FormState>();
-  final authService = FirebaseAuthService();
+
   @override
   void dispose() {
     emailController.dispose();
@@ -24,23 +25,24 @@ class _SignupScreenState extends State<SignupScreen> {
     super.dispose();
   }
 
-  Future<void> signIn() async {
-    await authService.createUserWithEmailAndPassword(
-        emailController, passwordController);
-  }
-
-  // Future<void> createUserWithEmailAndPassword() async {
-  //   try {
-  //     final userCredential =
-  //         await FirebaseAuth.instance.createUserWithEmailAndPassword(
-  //       email: emailController.text.trim(),
-  //       password: passwordController.text.trim(),
-  //     );
-  //     print(userCredential.user);
-  //   } on FirebaseAuthException catch (e) {
-  //     print(e);
-  //   }
+  // Future<void> signIn() async {
+  //   await authService.createUserWithEmailAndPassword(
+  //       emailController, passwordController);
   // }
+
+  Future<void> createUserWithEmailAndPassword() async {
+    try {
+      final userCredential =
+          await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: emailController.text.trim(),
+        password: passwordController.text.trim(),
+      );
+
+      print(userCredential.user);
+    } on FirebaseAuthException catch (e) {
+      print(e);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -78,7 +80,7 @@ class _SignupScreenState extends State<SignupScreen> {
               const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () async {
-                  await signIn();
+                  await createUserWithEmailAndPassword();
                 },
                 child: const Text(
                   'SIGN UP',

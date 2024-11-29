@@ -77,12 +77,6 @@ class _ProgressScreenState extends State<ProgressScreen> {
                                 .collection('tasks')
                                 .doc(snapshot.data!.docs[index].id)
                                 .delete();
-
-                            // ScaffoldMessenger.of(context).showSnackBar(
-                            //   const SnackBar(
-                            //     content: Text('Task Deleted'),
-                            //   ),
-                            // );
                           }
                         },
                         child: Row(
