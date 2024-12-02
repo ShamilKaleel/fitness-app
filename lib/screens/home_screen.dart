@@ -4,6 +4,7 @@ import 'package:fitnesapp/screens/exercise/exercise_screen.dart';
 import 'package:fitnesapp/services/firebase_auth_service.dart';
 import 'package:fitnesapp/widgets/card_body.dart';
 
+
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
 
@@ -19,6 +20,7 @@ class HomeScreen extends StatelessWidget {
     "Item 5",
     "Item 6",
   ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,6 +46,7 @@ class HomeScreen extends StatelessWidget {
           IconButton(
               icon: const Icon(Icons.person, color: Color(0xFF896CFE)),
               onPressed: () async {
+                // uploadFoodsToFirestore();
                 await authService.signOut();
               }),
         ],

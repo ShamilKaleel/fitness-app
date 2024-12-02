@@ -1,15 +1,14 @@
+import 'package:fitnesapp/models/daily_progress.dart';
 import 'package:fitnesapp/utils/app_constants.dart';
 import 'package:flutter/material.dart';
 
 class CongratulationsScreen extends StatefulWidget {
   const CongratulationsScreen({
     super.key,
-    // required this.doneExercise,
-    // required this.totalExercise,
+    required this.progress,
   }); // Add parameters
 
-  // final int doneExercise;
-  // final int totalExercise;
+  final DailyProgress progress;
 
   @override
   State<CongratulationsScreen> createState() => _CongratulationsScreenState();
@@ -61,7 +60,8 @@ class _CongratulationsScreenState extends State<CongratulationsScreen> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          _infoCard('2 Hours', Icons.timer),
+                          _infoCard(widget.progress.doneExercise.toString(),
+                              Icons.timer),
                           _infoCard(
                               '300 Calories', Icons.local_fire_department),
                           _infoCard('Moderate', Icons.directions_run),
