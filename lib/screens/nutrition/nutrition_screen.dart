@@ -1,69 +1,55 @@
-import 'package:flutter/material.dart';
-import 'package:fitnesapp/widgets/card_body.dart'; // Adjust the import path as necessary
-import 'package:fitnesapp/utils/app_constants.dart'; // Adjust the import path as necessary
+// import 'package:flutter/material.dart';
+// import 'package:fitnesapp/services/food_service.dart';
+// import 'package:fitnesapp/models/food.dart';
 
-class NutritionScreen extends StatelessWidget {
-  NutritionScreen({super.key});
-  final List<String> items = [
-    "Item 1",
-    "Item 2",
-    "Item 3",
-    "Item 4",
-    "Item 5",
-    "Item 6",
-  ];
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Test"),
-      ),
-      body: Column(
-        children: [
-          Expanded(
-            flex: 5,
-            child: ListView(children: [
-              SizedBox(
-                  height: 150,
-                  child: ListView.builder(
-                    padding: const EdgeInsets.only(left: 16),
+// class FoodsScreen extends StatefulWidget {
+//   const FoodsScreen({super.key});
 
-                    scrollDirection:
-                        Axis.horizontal, // Enables horizontal scrolling
-                    itemCount: items.length,
-                    itemBuilder: (context, index) {
-                      return Container(
-                        width: 370, // Fixed width for each item
-                        margin: const EdgeInsets.only(
-                            right: 10.0), // Spacing between items
-                        decoration: BoxDecoration(
-                          color: Colors.teal.shade100,
-                          borderRadius: BorderRadius.circular(20),
-                          border: Border.all(color: Colors.teal, width: 1),
-                        ),
-                        child: Center(
-                          child: Text(
-                            items[index],
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w500,
-                              color: Colors.teal.shade800,
-                            ),
-                          ),
-                        ),
-                      );
-                    },
-                  )),
-              ...AppConstants.bodyPartsImage.map<Widget>((bodyPartsImage) {
-                return CardBody(
-                  bodyPart: bodyPartsImage['name'] as String,
-                  imageURL: bodyPartsImage['image'] as String,
-                );
-              })
-            ]),
-          ),
-        ],
-      ),
-    );
-  }
-}
+//   @override
+//   _FoodsScreenState createState() => _FoodsScreenState();
+// }
+
+// class _FoodsScreenState extends State<FoodsScreen> {
+//   final FoodService _foodService = FoodService();
+//   late Future<List<Food>> _foodsFuture;
+
+//   @override
+//   void initState() {
+//     super.initState();
+//     _foodsFuture = _foodService.getAllFoods();
+//   }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: Text('Foods'),
+//       ),
+//       body: FutureBuilder<List<Food>>(
+//         future: _foodsFuture,
+//         builder: (context, snapshot) {
+//           if (snapshot.connectionState == ConnectionState.waiting) {
+//             return Center(child: CircularProgressIndicator());
+//           } else if (snapshot.hasError) {
+//             return Center(child: Text('Error: ${snapshot.error}'));
+//           } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+//             return Center(child: Text('No foods available.'));
+//           } else {
+//             final foods = snapshot.data!;
+//             return ListView.builder(
+//               itemCount: foods.length,
+//               itemBuilder: (context, index) {
+//                 final food = foods[index];
+//                 return ListTile(
+//                   title: Text(food.name),
+//                   subtitle: Text('Calories: ${food.caloric} kcal'),
+//                   trailing: Text('${food.category}'),
+//                 );
+//               },
+//             );
+//           }
+//         },
+//       ),
+//     );
+//   }
+// }

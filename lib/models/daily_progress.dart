@@ -40,4 +40,7 @@ class DailyProgress {
       bodyPart: map['bodyPart'] as String,
     );
   }
+
+  double get progressPercentage =>
+      totalExercise == 0 ? 0 : (doneExercise / totalExercise) * 100;
 }

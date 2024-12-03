@@ -3,7 +3,7 @@ import 'package:fitnesapp/screens/progress/daily_progress_screen.dart';
 import 'package:fitnesapp/utils/app_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:fitnesapp/screens/home_screen.dart';
-import 'package:fitnesapp/screens/nutrition/nutrition_screen.dart';
+import 'package:fitnesapp/screens/nutrition/foods_screen.dart';
 import 'package:fitnesapp/screens/bmi/bmi_screen.dart';
 import 'package:fitnesapp/screens/profile/profile_screen.dart';
 import 'package:fitnesapp/screens/progress/progress_screen.dart';
@@ -12,7 +12,7 @@ class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
 
   @override
-  _MainScreenState createState() => _MainScreenState();
+  State<MainScreen> createState() => _MainScreenState();
 }
 
 class _MainScreenState extends State<MainScreen> {
@@ -23,7 +23,7 @@ class _MainScreenState extends State<MainScreen> {
     HomeScreen(),
     const BMIScreen(),
     const DailyProgressScreen(),
-    NutritionScreen(),
+    FoodsScreen(),
   ];
 
   @override

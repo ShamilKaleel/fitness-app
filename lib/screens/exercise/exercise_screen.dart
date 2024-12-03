@@ -13,7 +13,7 @@ class ExerciseScreen extends StatefulWidget {
   const ExerciseScreen({required this.bodyPart, super.key});
 
   @override
-  _ExerciseScreenState createState() => _ExerciseScreenState();
+  State<ExerciseScreen> createState() => _ExerciseScreenState();
 }
 
 class _ExerciseScreenState extends State<ExerciseScreen> {

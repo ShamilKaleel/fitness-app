@@ -2,7 +2,6 @@ import 'package:fitnesapp/screens/main_screen.dart';
 import 'package:fitnesapp/utils/app_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:fitnesapp/screens/auth/onboard_screen.dart';
-import 'package:fitnesapp/screens/auth/login_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'package:firebase_auth/firebase_auth.dart';

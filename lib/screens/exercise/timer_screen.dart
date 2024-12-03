@@ -9,7 +9,7 @@ class TimerScreen extends StatefulWidget {
   const TimerScreen({required this.exercises, super.key});
 
   @override
-  _TimerScreenState createState() => _TimerScreenState();
+  State<TimerScreen> createState() => _TimerScreenState();
 }
 
 class _TimerScreenState extends State<TimerScreen> {

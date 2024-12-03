@@ -7,7 +7,7 @@ class BMIScreen extends StatefulWidget {
   const BMIScreen({super.key});
 
   @override
-  _BMIScreenState createState() => _BMIScreenState();
+  State<BMIScreen> createState() => _BMIScreenState();
 }
 
 class _BMIScreenState extends State<BMIScreen> {

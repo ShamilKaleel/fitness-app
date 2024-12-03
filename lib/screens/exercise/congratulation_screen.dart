@@ -1,12 +1,14 @@
 import 'package:fitnesapp/models/daily_progress.dart';
 import 'package:fitnesapp/utils/app_constants.dart';
+import 'package:fitnesapp/widgets/gradient_button.dart';
 import 'package:flutter/material.dart';
+import 'package:fitnesapp/utils/formatters.dart';
 
 class CongratulationsScreen extends StatefulWidget {
   const CongratulationsScreen({
     super.key,
     required this.progress,
-  }); // Add parameters
+  });
 
   final DailyProgress progress;
 
@@ -60,11 +62,16 @@ class _CongratulationsScreenState extends State<CongratulationsScreen> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          _infoCard(widget.progress.doneExercise.toString(),
-                              Icons.timer),
                           _infoCard(
-                              '300 Calories', Icons.local_fire_department),
-                          _infoCard('Moderate', Icons.directions_run),
+                              capitalizeFirstLetter(
+                                  widget.progress.bodyPart.toString()),
+                              Icons.directions_run),
+                          _infoCard(
+                              "${widget.progress.doneExercise}/${widget.progress.totalExercise} Exercises",
+                              Icons.local_fire_department),
+                          _infoCard(
+                              "${widget.progress.progressPercentage}% Done",
+                              Icons.pie_chart_sharp),
                         ],
                       ),
                     ),
@@ -76,6 +83,15 @@ class _CongratulationsScreenState extends State<CongratulationsScreen> {
 
           const SizedBox(height: 40),
           // Buttons
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: GradientButton(
+                text: "Go to the next workout",
+                onPressed: () {
+                  // Handle navigation to the next workout
+                  Navigator.popUntil(context, ModalRoute.withName('/'));
+                }),
+          ),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
               backgroundColor: AppConstants.secondaryColor,
@@ -117,7 +133,6 @@ class _CongratulationsScreenState extends State<CongratulationsScreen> {
     );
   }
 
-  // Helper widget for info cards
   Widget _infoCard(String text, IconData icon) {
     return Column(
       children: [
