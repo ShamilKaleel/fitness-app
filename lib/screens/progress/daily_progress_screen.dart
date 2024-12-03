@@ -9,7 +9,7 @@ class DailyProgressScreen extends StatefulWidget {
   const DailyProgressScreen({super.key});
 
   @override
-  _DailyProgressScreenState createState() => _DailyProgressScreenState();
+  State<DailyProgressScreen> createState() => _DailyProgressScreenState();
 }
 
 class _DailyProgressScreenState extends State<DailyProgressScreen> {
@@ -40,7 +40,7 @@ class _DailyProgressScreenState extends State<DailyProgressScreen> {
         _isLoading = false;
       });
       ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text('Error fetching data: $e')));
+          .showSnackBar(const SnackBar(content: Text('Error fetching data:')));
     }
   }
 
@@ -74,7 +74,8 @@ class _DailyProgressScreenState extends State<DailyProgressScreen> {
             onDateChanged: _onDateChanged,
           ),
           _isLoading
-              ? const Center(child: CircularProgressIndicator())
+              ? const Expanded(
+                  child: Center(child: CircularProgressIndicator()))
               : Expanded(
                   child: _progressList.isEmpty
                       ? const Center(
@@ -105,18 +106,21 @@ class _DailyProgressScreenState extends State<DailyProgressScreen> {
                 ),
         ],
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => _navigateToForm(),
-        child: const Icon(Icons.add),
-      ),
     );
   }
 
   Future<void> _deleteProgress(int id) async {
     try {
       await _service.deleteDailyProgress(id);
-      ScaffoldMessenger.of(context)
-          .showSnackBar(const SnackBar(content: Text('Deleted successfully!')));
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: const Text('Deleted successfully!'),
+        behavior: SnackBarBehavior.floating, // Floating style
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
+        margin: const EdgeInsets.all(16),
+        duration: const Duration(seconds: 3),
+      ));
       _fetchDailyProgress();
     } catch (e) {
       ScaffoldMessenger.of(context)

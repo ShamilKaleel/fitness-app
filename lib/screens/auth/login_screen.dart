@@ -27,14 +27,30 @@ class _LoginScreenState extends State<LoginScreen> {
     super.dispose();
   }
 
-  Future<void> loginUserWithEmailAndPassword() async {
+  Future<void> loginUserWithEmailAndPassword(BuildContext context) async {
     try {
       final userCredential =
           await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: emailController.text.trim(),
         password: passwordController.text.trim(),
       );
+
       print(userCredential.user);
+
+      // Show success SnackBar
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: const Text('Login Successful!',
+              style: TextStyle(fontSize: 16), textAlign: TextAlign.center),
+          backgroundColor: AppConstants.yellow,
+          behavior: SnackBarBehavior.floating,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
+          duration: const Duration(seconds: 2),
+        ),
+      );
+
       FirebaseAuth.instance.authStateChanges().listen((User? user) {
         if (user != null) {
           Navigator.pushReplacement(
@@ -46,7 +62,23 @@ class _LoginScreenState extends State<LoginScreen> {
         }
       });
     } on FirebaseAuthException catch (e) {
-      print(e);
+      //print(e);
+
+      // Show error SnackBar
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            e.message ?? 'An error occurred. Please try again.',
+            style: const TextStyle(fontSize: 16),
+          ),
+          backgroundColor: const Color.fromARGB(255, 245, 102, 91),
+          behavior: SnackBarBehavior.floating,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
+          duration: const Duration(seconds: 3),
+        ),
+      );
     }
   }
 
@@ -86,7 +118,7 @@ class _LoginScreenState extends State<LoginScreen> {
               const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () async {
-                  await loginUserWithEmailAndPassword();
+                  await loginUserWithEmailAndPassword(context);
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: AppConstants.secondaryColor,

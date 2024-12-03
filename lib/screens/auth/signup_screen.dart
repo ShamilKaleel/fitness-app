@@ -1,3 +1,4 @@
+import 'package:fitnesapp/utils/app_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:fitnesapp/screens/auth/login_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -25,12 +26,7 @@ class _SignupScreenState extends State<SignupScreen> {
     super.dispose();
   }
 
-  // Future<void> signIn() async {
-  //   await authService.createUserWithEmailAndPassword(
-  //       emailController, passwordController);
-  // }
-
-  Future<void> createUserWithEmailAndPassword() async {
+  Future<void> createUserWithEmailAndPassword(BuildContext context) async {
     try {
       final userCredential =
           await FirebaseAuth.instance.createUserWithEmailAndPassword(
@@ -39,8 +35,42 @@ class _SignupScreenState extends State<SignupScreen> {
       );
 
       print(userCredential.user);
+
+      // Show success SnackBar
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: const Text(
+            'User registered successfully!',
+            style: TextStyle(fontSize: 16),
+          ),
+          backgroundColor: AppConstants.yellow,
+          behavior: SnackBarBehavior.floating,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
+          duration: const Duration(seconds: 3),
+        ),
+      );
+
+      Navigator.pop(context);
     } on FirebaseAuthException catch (e) {
       print(e);
+
+      // Show error SnackBar
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            e.message ?? 'An error occurred. Please try again.',
+            style: const TextStyle(fontSize: 16),
+          ),
+          backgroundColor: const Color.fromARGB(255, 245, 102, 91),
+          behavior: SnackBarBehavior.floating,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
+          duration: const Duration(seconds: 3),
+        ),
+      );
     }
   }
 
@@ -57,9 +87,9 @@ class _SignupScreenState extends State<SignupScreen> {
               const Text(
                 'Sign Up.',
                 style: TextStyle(
-                  fontSize: 50,
-                  fontWeight: FontWeight.bold,
-                ),
+                    fontSize: 50,
+                    fontWeight: FontWeight.bold,
+                    color: AppConstants.yellow),
               ),
               const SizedBox(height: 10),
               const SizedBox(height: 20),
@@ -80,8 +110,15 @@ class _SignupScreenState extends State<SignupScreen> {
               const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () async {
-                  await createUserWithEmailAndPassword();
+                  await createUserWithEmailAndPassword(context);
                 },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: AppConstants.secondaryColor,
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 50,
+                    vertical: 10,
+                  ),
+                ),
                 child: const Text(
                   'SIGN UP',
                   style: TextStyle(

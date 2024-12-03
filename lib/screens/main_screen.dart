@@ -38,11 +38,7 @@ class _MainScreenState extends State<MainScreen> {
           });
         },
         elevation: 0, // Remove the shadow
-        // Background color
-        selectedItemColor: const Color.fromARGB(
-            255, 255, 255, 255), // Color for the selected label and icon
-        unselectedItemColor:
-            Colors.grey, // Color for the unselected labels and icons
+
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),

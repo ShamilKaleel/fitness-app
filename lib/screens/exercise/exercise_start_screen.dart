@@ -119,6 +119,7 @@ class _ExerciseStartScreenState extends State<ExerciseStartScreen> {
         setState(() {
           _isLorading = false;
         });
+
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
@@ -128,8 +129,8 @@ class _ExerciseStartScreenState extends State<ExerciseStartScreen> {
           ),
         );
       } catch (e) {
-        ScaffoldMessenger.of(context)
-            .showSnackBar(SnackBar(content: Text('Error: $e')));
+        ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Something went wrong')));
       }
       // Go back to the ExerciseScreen when the user wants to cancel
     }
@@ -173,7 +174,7 @@ class _ExerciseStartScreenState extends State<ExerciseStartScreen> {
       body: SingleChildScrollView(
         child: _isLorading
             ? const SizedBox(
-                height: 300,
+                height: 700,
                 child: Center(
                   child: CircularProgressIndicator(),
                 ),

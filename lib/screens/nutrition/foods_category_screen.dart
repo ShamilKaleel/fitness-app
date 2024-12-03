@@ -31,11 +31,12 @@ class _FoodsByCategoryScreenState extends State<FoodsByCategoryScreen> {
         future: _foodsFuture,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           } else if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
           } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-            return Center(child: Text('No foods available in this category.'));
+            return const Center(
+                child: Text('No foods available in this category.'));
           } else {
             final foods = snapshot.data!;
             return ListView.builder(
@@ -45,7 +46,7 @@ class _FoodsByCategoryScreenState extends State<FoodsByCategoryScreen> {
                 return ListTile(
                   title: Text(food.name),
                   subtitle: Text('Calories: ${food.caloric} kcal'),
-                  trailing: Text('${food.category}'),
+                  trailing: Text(food.category),
                 );
               },
             );

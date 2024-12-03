@@ -3,6 +3,7 @@ import 'package:fitnesapp/utils/app_constants.dart';
 import 'package:fitnesapp/widgets/gradient_button.dart';
 import 'package:flutter/material.dart';
 import 'package:fitnesapp/utils/formatters.dart';
+import 'package:fitnesapp/screens/progress/daily_progress_screen.dart'; // Add this import
 
 class CongratulationsScreen extends StatefulWidget {
   const CongratulationsScreen({
@@ -83,39 +84,46 @@ class _CongratulationsScreenState extends State<CongratulationsScreen> {
 
           const SizedBox(height: 40),
           // Buttons
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: GradientButton(
-                text: "Go to the next workout",
-                onPressed: () {
-                  // Handle navigation to the next workout
-                  Navigator.popUntil(context, ModalRoute.withName('/'));
-                }),
-          ),
+          // Padding(
+          //   padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          //   child: GradientButton(
+          //       text: "Go to the next workout",
+          //       onPressed: () {
+          //         // Handle navigation to the next workout
+          //         Navigator.popUntil(context, ModalRoute.withName('/'));
+          //       }),
+          // ),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
               backgroundColor: AppConstants.secondaryColor,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(30.0),
               ),
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 100, vertical: 15),
             ),
             onPressed: () {
-              // Handle navigation to the next workout
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const DailyProgressScreen(),
+                ),
+              ); // Handle navigation to Home
             },
             child: const Text(
-              'Go to the next workout',
+              'Go to Progress',
               style: TextStyle(fontSize: 16.0, color: Colors.white),
             ),
           ),
           const SizedBox(height: 20),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 130, vertical: 15),
               backgroundColor: AppConstants.yellow,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(30.0),
               ),
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
             ),
             onPressed: () {
               Navigator.popUntil(context,

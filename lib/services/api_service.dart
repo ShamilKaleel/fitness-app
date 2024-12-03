@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import '../models/exercise.dart';
 
+//'x-rapidapi-key': '5f3287a535msh4f40f616472d57fp18b4a9jsn6f3883b64326'
 class ApiService {
   static const String _baseUrl = 'https://exercisedb.p.rapidapi.com';
   static const Map<String, String> _headers = {
