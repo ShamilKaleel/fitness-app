@@ -33,7 +33,6 @@ class Food {
   // Convert Food object to Map for Firestore
   Map<String, dynamic> toMap() {
     return {
-      'id': id,
       'name': name,
       'caloric': caloric,
       'fat': fat,

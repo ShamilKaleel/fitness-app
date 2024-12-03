@@ -31,4 +31,22 @@ class FoodService {
       throw Exception('Failed to fetch foods by category.');
     }
   }
+
+  /// Upload a list of foods to Firestore
+  Future<void> uploadFoods(List<Map<String, dynamic>> foodList) async {
+    final batch = _firestore.batch();
+
+    try {
+      for (var food in foodList) {
+        final docRef = _firestore.collection(collectionName).doc();
+        batch.set(docRef, food);
+      }
+
+      await batch.commit();
+      print('Food list uploaded successfully!');
+    } catch (e) {
+      print('Error uploading foods: $e');
+      throw Exception('Failed to upload food list.');
+    }
+  }
 }

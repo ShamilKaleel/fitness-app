@@ -103,7 +103,7 @@ class _ExerciseStartScreenState extends State<ExerciseStartScreen> {
       try {
         _dailyProgress = DailyProgress(
           id: DateTime.now().millisecondsSinceEpoch,
-          doneExercise: currentExerciseIndex,
+          doneExercise: currentExerciseIndex == 9 ? 10 : currentExerciseIndex,
           totalExercise: widget.exercises.length,
           date: DateTime.now(),
           userId: FirebaseAuth.instance.currentUser!.uid,

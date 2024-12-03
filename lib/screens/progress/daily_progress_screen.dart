@@ -4,6 +4,7 @@ import 'package:fitnesapp/models/daily_progress.dart';
 import 'package:fitnesapp/services/daily_progress_service.dart';
 import 'package:fitnesapp/screens/progress/daily_progress_form.dart';
 import 'package:fitnesapp/widgets/date_selector.dart';
+import 'package:fitnesapp/widgets/progress_list_view.dart';
 
 class DailyProgressScreen extends StatefulWidget {
   const DailyProgressScreen({super.key});
@@ -84,24 +85,9 @@ class _DailyProgressScreenState extends State<DailyProgressScreen> {
                             style: TextStyle(fontSize: 16),
                           ),
                         )
-                      : ListView.builder(
-                          itemCount: _progressList.length,
-                          itemBuilder: (context, index) {
-                            final progress = _progressList[index];
-                            return ListTile(
-                              title: Text('Body Part: ${progress.bodyPart}'),
-                              subtitle: Text(
-                                'Date: ${DateFormat('yyyy-MM-dd').format(progress.date)}\n'
-                                'Exercises: ${progress.doneExercise}/${progress.totalExercise}',
-                              ),
-                              trailing: IconButton(
-                                icon:
-                                    const Icon(Icons.delete, color: Colors.red),
-                                onPressed: () => _deleteProgress(progress.id),
-                              ),
-                              onTap: () => _navigateToForm(progress: progress),
-                            );
-                          },
+                      : ProgressListView(
+                          progressList: _progressList,
+                          deleteProgress: _deleteProgress,
                         ),
                 ),
         ],

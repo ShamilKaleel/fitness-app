@@ -24,6 +24,7 @@ class _MainScreenState extends State<MainScreen> {
     const BMIScreen(),
     const DailyProgressScreen(),
     FoodsScreen(),
+    const ProfileScreen(),
   ];
 
   @override
@@ -57,6 +58,10 @@ class _MainScreenState extends State<MainScreen> {
           BottomNavigationBarItem(
             icon: Icon(Icons.restaurant),
             label: 'Nutrition',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: 'Profile',
           ),
         ],
       ),
