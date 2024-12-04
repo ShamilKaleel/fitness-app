@@ -84,4 +84,32 @@ class AppConstants {
     {"range": "35–39.9", "category": "Highly Obese"},
     {"range": "40 >", "category": "Extremely Obese"},
   ];
+
+// List of foods categories
+  static const List<Map<String, String>> foodsImage = [
+    {
+      'category': 'carbohydrates',
+      'image': 'asset/image/foods/carbohydrates.jpg',
+    },
+    {
+      'category': 'proteins',
+      'image': 'asset/image/foods/proteins.jpg',
+    },
+    {
+      'category': 'fats',
+      'image': 'asset/image/foods/fats.jpg',
+    },
+    {
+      'category': 'minerals',
+      'image': 'asset/image/foods/minerals.jpg',
+    },
+    {
+      'category': 'fiber',
+      'image': 'asset/image/foods/fiber.jpg',
+    },
+    {
+      'category': 'antioxidants',
+      'image': 'asset/image/foods/antioxidants.jpg',
+    },
+  ];
 }

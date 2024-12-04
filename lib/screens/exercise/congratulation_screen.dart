@@ -4,6 +4,7 @@ import 'package:fitnesapp/widgets/gradient_button.dart';
 import 'package:flutter/material.dart';
 import 'package:fitnesapp/utils/formatters.dart';
 import 'package:fitnesapp/screens/progress/daily_progress_screen.dart'; // Add this import
+import 'package:fitnesapp/screens/main_screen.dart';
 
 class CongratulationsScreen extends StatefulWidget {
   const CongratulationsScreen({
@@ -93,34 +94,13 @@ class _CongratulationsScreenState extends State<CongratulationsScreen> {
           //         Navigator.popUntil(context, ModalRoute.withName('/'));
           //       }),
           // ),
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              backgroundColor: AppConstants.secondaryColor,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(30.0),
-              ),
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 100, vertical: 15),
-            ),
-            onPressed: () {
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const DailyProgressScreen(),
-                ),
-              ); // Handle navigation to Home
-            },
-            child: const Text(
-              'Go to Progress',
-              style: TextStyle(fontSize: 16.0, color: Colors.white),
-            ),
-          ),
+
           const SizedBox(height: 20),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
               padding:
                   const EdgeInsets.symmetric(horizontal: 130, vertical: 15),
-              backgroundColor: AppConstants.yellow,
+              backgroundColor: AppConstants.secondaryColor,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(30.0),
               ),
@@ -131,8 +111,7 @@ class _CongratulationsScreenState extends State<CongratulationsScreen> {
             },
             child: const Text(
               'Home',
-              style:
-                  TextStyle(fontSize: 16.0, color: AppConstants.secondaryColor),
+              style: TextStyle(fontSize: 16.0, color: AppConstants.yellow),
             ),
           ),
           const Spacer(),

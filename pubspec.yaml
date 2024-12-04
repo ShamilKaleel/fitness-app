@@ -75,6 +75,7 @@ flutter:
     - asset/image/Neck/
     - asset/image/U&L Legs/
     - asset/image/Waist/
+    - asset/image/foods/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

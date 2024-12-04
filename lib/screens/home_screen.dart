@@ -27,13 +27,6 @@ class HomeScreen extends StatelessWidget {
             ),
           ],
         ),
-        actions: [
-          IconButton(
-              icon: const Icon(Icons.person, color: Color(0xFF896CFE)),
-              onPressed: () async {
-                await authService.signOut();
-              }),
-        ],
       ),
       body: Padding(
         padding: const EdgeInsets.only(top: 0.0),

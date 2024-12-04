@@ -5,7 +5,6 @@ import 'package:fitnesapp/screens/auth/onboard_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:fitnesapp/screens/auth/login_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -27,7 +26,7 @@ void main() async {
         if (snapshot.data != null) {
           return const MainScreen();
         }
-        return const LoginScreen();
+        return const OnboardScreen();
       },
     ),
   ));

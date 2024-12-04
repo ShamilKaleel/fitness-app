@@ -53,11 +53,10 @@ class _LoginScreenState extends State<LoginScreen> {
 
       FirebaseAuth.instance.authStateChanges().listen((User? user) {
         if (user != null) {
-          Navigator.pushReplacement(
+          Navigator.pushAndRemoveUntil(
             context,
-            MaterialPageRoute(
-              builder: (context) => const MainScreen(),
-            ),
+            MaterialPageRoute(builder: (context) => const MainScreen()),
+            (Route<dynamic> route) => false, // Removes all previous routes
           );
         }
       });

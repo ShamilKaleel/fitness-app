@@ -1,17 +1,33 @@
-import 'package:fitnesapp/utils/app_constants.dart';
 import 'package:flutter/material.dart';
+import 'package:fitnesapp/utils/app_constants.dart';
 import 'package:fitnesapp/screens/nutrition/foods_category_screen.dart';
-import 'package:fitnesapp/utils/formatters.dart';
 
 class FoodsScreen extends StatelessWidget {
-  // Categories list limited to specified categories
-  final List<String> categories = [
-    'carbohydrates',
-    'proteins',
-    'fats',
-    'minerals',
-    'fiber',
-    'antioxidants',
+  final List<Map<String, dynamic>> foodsImage = [
+    {
+      'category': 'carbohydrates',
+      'image': Icons.fastfood,
+    },
+    {
+      'category': 'proteins',
+      'image': Icons.local_pizza,
+    },
+    {
+      'category': 'fats',
+      'image': Icons.lunch_dining,
+    },
+    {
+      'category': 'minerals',
+      'image': Icons.cake,
+    },
+    {
+      'category': 'fiber',
+      'image': Icons.rice_bowl,
+    },
+    {
+      'category': 'antioxidants',
+      'image': Icons.coffee,
+    },
   ];
 
   FoodsScreen({super.key});
@@ -23,20 +39,24 @@ class FoodsScreen extends StatelessWidget {
         title: const Text('Select Food Category'),
       ),
       body: ListView.builder(
-        itemCount: categories.length,
+        itemCount: foodsImage.length,
         itemBuilder: (context, index) {
-          final category = categories[index];
+          final food = foodsImage[index];
           return card(
             child: Card(
+              elevation: 0,
+              surfaceTintColor: AppConstants.purple,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10),
               ),
               child: ListTile(
-                leading: const Icon(
-                  Icons.fastfood,
+                leading: Icon(
+                  food['image'] as IconData,
+                  color: AppConstants.purple,
+                  size: 40,
                 ),
                 title: Text(
-                  capitalizeFirstLetter(category),
+                  capitalizeFirstLetter(food['category']!),
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 18,
@@ -50,7 +70,7 @@ class FoodsScreen extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                       builder: (context) =>
-                          FoodsByCategoryScreen(category: category),
+                          FoodsByCategoryScreen(category: food['category']!),
                     ),
                   );
                 },
@@ -72,5 +92,9 @@ class FoodsScreen extends StatelessWidget {
       ),
       child: child,
     );
+  }
+
+  String capitalizeFirstLetter(String text) {
+    return text[0].toUpperCase() + text.substring(1);
   }
 }

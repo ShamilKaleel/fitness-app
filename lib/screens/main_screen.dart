@@ -7,6 +7,7 @@ import 'package:fitnesapp/screens/nutrition/foods_screen.dart';
 import 'package:fitnesapp/screens/bmi/bmi_screen.dart';
 import 'package:fitnesapp/screens/profile/profile_screen.dart';
 import 'package:fitnesapp/screens/progress/progress_screen.dart';
+import 'package:fitnesapp/screens/profile/profile_form_screen.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});

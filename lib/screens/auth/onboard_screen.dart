@@ -4,6 +4,9 @@ import 'package:fitnesapp/screens/auth/login_screen.dart'; // Adjust the path as
 
 class OnboardScreen extends StatefulWidget {
   const OnboardScreen({super.key});
+  static route() => MaterialPageRoute(
+        builder: (context) => const OnboardScreen(),
+      );
 
   @override
   State<OnboardScreen> createState() => _OnboardScreenState();

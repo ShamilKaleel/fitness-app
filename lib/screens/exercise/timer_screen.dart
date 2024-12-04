@@ -13,7 +13,7 @@ class TimerScreen extends StatefulWidget {
 }
 
 class _TimerScreenState extends State<TimerScreen> {
-  int remainingSeconds = 2000;
+  int remainingSeconds = 10;
 
   @override
   void initState() {
